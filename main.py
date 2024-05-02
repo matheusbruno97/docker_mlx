@@ -19,7 +19,6 @@ def automation(driver): # Automation!
             
     except Exception as e:
             print(f"Something happened: {e}")
-            driver.quit()
     finally:
         driver.quit()
         mlx.stop_profile(quick_profile_id) # Close browser profile
