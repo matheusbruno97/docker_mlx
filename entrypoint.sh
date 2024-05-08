@@ -3,6 +3,8 @@
 # Debugging purposes
 # whoami && arch && uname && cat /etc/*-release && df -h && free -h &&
 
+pip install requests selenium
+
 # Start Xvfb and Multilogin X agent
 xvfb-run /opt/mlx/agent.bin &
 
