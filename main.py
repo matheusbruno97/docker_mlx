@@ -1,9 +1,7 @@
 import mlx_functions as mlx
-from selenium.webdriver.support.ui import WebDriverWait, Select
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-import time
 from env import *
+import time
+from selenium.webdriver.common.by import By
 
 def automation(driver): # Automation!
 
@@ -33,7 +31,7 @@ if __name__ == "__main__":
             quick_profile_id, quick_profile_port, profile_started, message = mlx.start_quick_profile(token) # Start a quick profile
             if profile_started == True:
                 break
-            print(f"Profile couldn't be started. Probably downloading core. Will wait for 60 minutes and try again. Here is the message: {message}")
+            print(f"Profile couldn't be started. Probably downloading core. Will wait for 60 seconds and try again. Here is the message: {message}")
             time.sleep(60)
     except Exception as e:
          print(f"Problem with starting profile: {e}")
