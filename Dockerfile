@@ -44,10 +44,14 @@ RUN apt-get update && \
     python3 \
     python3-pip \
     libayatana-appindicator3-dev && \
+    pip install requests selenium && \
     curl --location --fail --output mlxdeb.deb "https://mlxdists.s3.eu-west-3.amazonaws.com/mlx/1.15.0/multiloginx-amd64.deb" && \
     dpkg -i mlxdeb.deb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Set display environment variable -> For Xvfb, very important. Needs to be done as root
+ENV DISPLAY=:99
 
 # Create user and set working directory -> After everything is installed, you need to create an user. Automation does not work as root. You need an user to automate your browser profiles.
 WORKDIR /app
