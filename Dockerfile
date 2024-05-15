@@ -9,6 +9,8 @@ libasound2 \
 python3 \
 python3-pip \
 curl && \
+curl --location --fail --output mlxdeb.deb "https://mlxdists.s3.eu-west-3.amazonaws.com/mlx/1.15.0/multiloginx-amd64.deb" && \
+dpkg -i mlxdeb.deb && \
 apt-get clean && \
 rm -rf /var/lib/apt/lists/*
 
@@ -20,6 +22,9 @@ RUN mkdir /tmp/.X11-unix
 RUN chown root:root /tmp/.X11-unix && \
     chmod 1777 /tmp/.X11-unix
 
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 FROM environment AS copyfiles
 
 USER mlx-user
@@ -28,8 +33,6 @@ WORKDIR /home/mlx-user/app
 COPY ./env.py /home/mlx-user/app
 COPY ./main.py /home/mlx-user/app
 COPY ./mlx_functions.py /home/mlx-user/app
-COPY ./entrypoint.sh /home/mlx-user/app/entrypoint.sh
-RUN chmod +x /home/mlx-user/app/entrypoint.sh
 
 FROM copyfiles AS entrypoint
 
